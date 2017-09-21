@@ -1,20 +1,17 @@
-extern crate pancurses;
+extern crate cursive;
 
-use pancurses::{initscr, endwin, Input, noecho};
+use cursive::Cursive;
+use cursive::views::{Dialog, TextView};
 
 fn main() {
-  let window = initscr();
-  window.printw("Type things, press delete to quit\n");
-  window.refresh();
-  window.keypad(true);
-  noecho();
-  loop {
-      match window.getch() {
-          Some(Input::Character(c)) => { window.addch(c); },
-          Some(Input::KeyDC) => break,
-          Some(input) => { window.addstr(&format!("{:?}", input)); },
-          None => ()
-      }
-  }
-  endwin();
+    // Creates the cursive root - required for every application.
+    let mut siv = Cursive::new();
+
+    // Creates a dialog with a single "Quit" button
+    siv.add_layer(Dialog::around(TextView::new("Hello Dialog!"))
+                         .title("Cursive")
+                         .button("Quit", |s| s.quit()));
+
+    // Starts the event loop.
+    siv.run();
 }
