@@ -1,0 +1,6 @@
+[package]
+name = "kudu"
+version = "0.1.0"
+authors = ["wbartnik <wbartnik@polchip.com>"]
+
+[dependencies]
