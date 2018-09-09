@@ -1,17 +1,22 @@
 extern crate cursive;
 
+use cursive::traits::*;
+use cursive::view::{Offset, Position};
+use cursive::views::{Dialog, OnEventView, TextView};
 use cursive::Cursive;
-use cursive::views::{Dialog, TextView};
 
 fn main() {
-    // Creates the cursive root - required for every application.
-    let mut siv = Cursive::default();
+    let mut app = Cursive::default();
+    app.set_fps(60);
+    app.add_global_callback('q', |s| s.quit());
 
-    // Creates a dialog with a single "Quit" button
-    siv.add_layer(Dialog::around(TextView::new("Hello Dialog!"))
-                         .title("Cursive")
-                         .button("Quit", |s| s.quit()));
+    let mut menu_size = app.screen_size();
+    let screen_size = app.screen_size();
+    menu_size.y = 1;
+    let menu = cursive::views::LinearLayout::horizontal()
+        .fixed_size(menu_size);
+    // .add_child() ??
 
-    // Starts the event loop.
-    siv.run();
+    app.add_fullscreen_layer(menu);
+    app.run();
 }
