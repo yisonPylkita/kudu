@@ -4,4 +4,4 @@ version = "0.1.0"
 authors = ["Wojciech Bartnik <yisonPylkita@gmail.com>"]
 
 [dependencies]
-cursive = "0.6"
+cursive = "0.9"
